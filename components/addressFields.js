@@ -26,11 +26,10 @@ const AddressFields = () => {
     }
 
     useEffect(() => {
-        if(arrayOfArrays.length)
-        {
+        if (arrayOfArrays.length) {
             setArrayOfArrays([])
         }
-    },[addresses])
+    }, [addresses])
 
     const handleAddAddress = () => {
         setNumberOfAddresses(numberOfAddresses + 1)
@@ -60,7 +59,7 @@ const AddressFields = () => {
                 {
                     indexArray.map(index => (
                         <>
-                            <input className="mt-2 w-[22rem] px-4 py-1.5 text-sm rounded-md" type="text" name={`Address${index}`} placeholder={`Address ${index}`}  onChange={e => modifyAddress(e.target.value, index - 1)} />
+                            <input className="mt-2 w-[22rem] px-4 py-1.5 text-sm rounded-md" type="text" name={`Address${index}`} placeholder={`Address ${index}`} onChange={e => modifyAddress(e.target.value, index - 1)} />
                             <br />
                         </>
                     ))
@@ -76,16 +75,24 @@ const AddressFields = () => {
             {arrayOfArrays.length !== 0 && (
                 <div className="mt-4">
                     {arrayOfArrays.map(arr => (
-                        <div className="text-white">
-                            {arr}
+                        <div className="flex content-center">
+                            {
+                                arr.map((arrValue, index) => (
+                                    <>
+                                        <div className="border-white border rounded-lg w-[10rem] h-[8rem] text-white text-center pt-[6%]">{arrValue}</div>
+                                        {(index !== arr.length - 1) && <div className="h-1 w-[4rem] bg-white mt-[7%]"></div>}
+                                    </>
+                                ))
+                            }
                         </div>
                     ))}
                 </div>
-            )}
-                
-            
+            )
+            }
 
-        </div>
+
+
+        </div >
     )
 }
 
