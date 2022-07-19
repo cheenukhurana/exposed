@@ -10,29 +10,53 @@ const findConnection = (addressArray) => {
         }
         arrayOfArrays.push(tempArray)
     }
+
+    // Shorting the length of addresses
+    for (let i = 0; i < arrayOfArrays.length; i++) {
+        for (let j = 0; j < arrayOfArrays[i].length; j++) {
+            if (arrayOfArrays[i][j].length > 13) {
+                let temp = arrayOfArrays[i][j].substring(0, 6) + "..." + arrayOfArrays[i][j].substring(arrayOfArrays[i][j].length - 4, arrayOfArrays[i][j].length)
+                arrayOfArrays[i][j] = temp
+            }
+        }
+    }
+
     return arrayOfArrays
 }
 
 
 const AddressFields = () => {
 
-    const [numberOfAddresses, setNumberOfAddresses] = useState(2)
-    const [addresses, setAddresses] = useState([])
+    const [addresses, setAddresses] = useState(["", ""])
     const [arrayOfArrays, setArrayOfArrays] = useState([])
-
-    const indexArray = []
-    for (let i = 1; i <= numberOfAddresses; i++) {
-        indexArray.push(i)
-    }
+    const [indexArray, setIndexArray] = useState([])
 
     useEffect(() => {
+        if (addresses.length !== indexArray.length) {
+            let tempArray = []
+            for (let i = 1; i <= addresses.length; i++) {
+                tempArray.push(i)
+            }
+            setIndexArray(tempArray)
+        }
+
         if (arrayOfArrays.length) {
             setArrayOfArrays([])
         }
     }, [addresses])
 
     const handleAddAddress = () => {
-        setNumberOfAddresses(numberOfAddresses + 1)
+        let tempArray = addresses.slice()
+        tempArray.push("")
+        setAddresses(tempArray)
+    }
+
+    const handleRemoveAddress = (index) => {
+        let newArray = addresses.slice()
+        newArray.splice(index, 1)
+        if (newArray.length >= 2) {
+            setAddresses(newArray)
+        }
     }
 
     const modifyAddress = (address, index) => {
@@ -42,7 +66,7 @@ const AddressFields = () => {
     }
 
     const handleFindConnection = () => {
-        for (let i = 0; i < numberOfAddresses; i++) {
+        for (let i = 0; i < addresses.length; i++) {
             if (!addresses[i]) {
                 alert('Enter all addresses')
                 return
@@ -58,10 +82,10 @@ const AddressFields = () => {
             <div>
                 {
                     indexArray.map(index => (
-                        <>
-                            <input className="mt-2 w-[22rem] px-4 py-1.5 text-sm rounded-md" type="text" name={`Address${index}`} placeholder={`Address ${index}`} onChange={e => modifyAddress(e.target.value, index - 1)} />
-                            <br />
-                        </>
+                        <div className="flex items-center mt-4">
+                            <input className="w-[22rem] px-4 py-1.5 text-sm rounded-md" type="text" name={`Address${index}`} placeholder={`Address ${index}`} value={addresses[index - 1]} onChange={e => modifyAddress(e.target.value, index - 1)} />
+                            <div onClick={() => handleRemoveAddress(index - 1)}><img className="ml-4 h-5 w-5" src="/remove_button.png" alt="" /></div>
+                        </div>
                     ))
                 }
 
