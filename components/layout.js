@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 export default function Layout({ children }) {
     return (
-        <div className='bg-[#000426] h-screen'>
+        <div className='bg-[#000426] min-h-screen'>
         {/* <div className="bg-gradient-to-br from-[#27235f] to-[#ea088c] h-screen"> */}
         {/*Colors for covalent: LightblueLogo:#26abe2, PinkLogo:#ea088c, DarkBlueLogo:#27235f, DArkBackgroundWebsite:#000426 */}
             <Head>

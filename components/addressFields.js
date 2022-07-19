@@ -75,12 +75,12 @@ const AddressFields = () => {
             {arrayOfArrays.length !== 0 && (
                 <div className="mt-4">
                     {arrayOfArrays.map(arr => (
-                        <div className="flex content-center">
+                        <div className="flex content-center mt-6">
                             {
                                 arr.map((arrValue, index) => (
                                     <>
                                         <div className="border-white border rounded-lg w-[10rem] h-[8rem] text-white text-center pt-[6%]">{arrValue}</div>
-                                        {(index !== arr.length - 1) && <div className="h-1 w-[4rem] bg-white mt-[7%]"></div>}
+                                        {(index !== (Number(arr.length) - 1)) && (<div className="h-1 w-[4rem] bg-white mt-[7%]"></div>)}
                                     </>
                                 ))
                             }
