@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react"
+import { findConnectedComponents } from '../utils/AddrGraph'
 
-const findConnection = (addressArray) => {
-    const arrayOfArrays = []
-    for (let i = 0; i < addressArray.length; i = i + 2) {
-        let tempArray = []
-        tempArray.push(addressArray[i])
-        if (i + 1 < addressArray.length) {
-            tempArray.push(addressArray[i + 1])
-        }
-        arrayOfArrays.push(tempArray)
-    }
+const findConnections = async (addressArray) => {
+
+    const arrayOfArrays = findConnectedComponents(addressArray)
 
     // Shorting the length of addresses
     for (let i = 0; i < arrayOfArrays.length; i++) {
@@ -65,7 +59,7 @@ const AddressFields = () => {
         setAddresses(newArray)
     }
 
-    const handleFindConnection = () => {
+    const handleFindConnection = async() => {
         for (let i = 0; i < addresses.length; i++) {
             if (!addresses[i]) {
                 alert('Enter all addresses')
@@ -73,7 +67,7 @@ const AddressFields = () => {
             }
         }
 
-        setArrayOfArrays(findConnection(addresses))
+        setArrayOfArrays(await findConnections(addresses))
     }
 
     return (

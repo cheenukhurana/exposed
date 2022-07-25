@@ -73,6 +73,16 @@ export async function FindConnection(originAddr, destinationAddr) {
     return finalResp;
 }
 
+
+// Delete below once findConnection works
+export function testConnection(addressA,addressB)
+{
+    if((addressA === "0x34Ca45aFcb10922b10DE0356Fa39BA36Fc7ac1AF" && addressB==="0x0aF81EF3bBF66CD544B953B11541B44250430199") || (addressA === "0x0aF81EF3bBF66CD544B953B11541B44250430199" && addressB==="0x34Ca45aFcb10922b10DE0356Fa39BA36Fc7ac1AF"))
+    return true
+
+    return false
+}
+
 // async function main() {
 //     // var resp = await GetAllChains();
 //     // console.log("===== All Chains on Coavlent Response: ", resp);
