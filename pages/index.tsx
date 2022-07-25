@@ -5,7 +5,6 @@ import AddressFields from '../components/addressFields'
 const Home: NextPage = () => {
   return (
     <Layout>
-      <p>Hello World!</p>
       <AddressFields />
     </Layout>
   )
