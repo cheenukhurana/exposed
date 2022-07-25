@@ -1,7 +1,7 @@
 
-import { utimes } from "fs";
+// import { utimes } from "fs";
 import fetch from "node-fetch";
-import { kill } from "process";
+// import { kill } from "process";
 
 const BASE_URL = "https://api.covalenthq.com/v1/";
 const API_KEY = "ckey_67ab6a60325149cc85edc08efbd";
@@ -55,7 +55,7 @@ export async function FindConnection(originAddr, destinationAddr) {
     var originIsConnected = false;
     j.data.items.forEach(tx => {
         console.log("==== transaction is: ", tx);
-        if(tx.from_address == destinationAddr || tx.to_address == destinationAddr) {
+        if(tx.from_address == destinationAddr.toLowerCase() || tx.to_address == destinationAddr.toLowerCase()) {
             console.log("====== connection exists", destinationAddr, tx.to_address, tx.from_address);
             originIsConnected = true;
             if(!conns.includes(destinationAddr)) {
@@ -73,17 +73,17 @@ export async function FindConnection(originAddr, destinationAddr) {
     return finalResp;
 }
 
-async function main() {
-    // var resp = await GetAllChains();
-    // console.log("===== All Chains on Coavlent Response: ", resp);
+// async function main() {
+//     // var resp = await GetAllChains();
+//     // console.log("===== All Chains on Coavlent Response: ", resp);
 
-    var resp2 = await FindConnection("0xf4267F20B463421D2cF3db534491b7920F79Ac4F", "0x4281ecf07378ee595c564a59048801330f3084ee");
-    console.log("====== transactions of main account is: ", resp2);
-}
+//     var resp2 = await FindConnection("0xf4267F20B463421D2cF3db534491b7920F79Ac4F", "0x4281ecf07378ee595c564a59048801330f3084ee");
+//     console.log("====== transactions of main account is: ", resp2);
+// }
 
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+// main()
+//   .then(() => process.exit(0))
+//   .catch((error) => {
+//     console.error(error);
+//     process.exit(1);
+//   });
