@@ -3,7 +3,7 @@ import { findConnectedComponents } from '../utils/AddrGraph'
 
 const findConnections = async (addressArray) => {
 
-    const arrayOfArrays = findConnectedComponents(addressArray)
+    const arrayOfArrays = await findConnectedComponents(addressArray)
 
     // Shorting the length of addresses
     for (let i = 0; i < arrayOfArrays.length; i++) {
@@ -77,7 +77,7 @@ const AddressFields = () => {
                 {
                     indexArray.map(index => (
                         <div className="flex items-center mt-4">
-                            <input className="w-[22rem] px-4 py-1.5 text-sm rounded-md" type="text" name={`Address${index}`} placeholder={`Address ${index}`} value={addresses[index - 1]} onChange={e => modifyAddress(e.target.value, index - 1)} />
+                            <input className="w-[24rem] px-4 py-1.5 text-sm rounded-md" type="text" name={`Address${index}`} placeholder={`Address ${index}`} value={addresses[index - 1]} onChange={e => modifyAddress(e.target.value, index - 1)} />
                             <div onClick={() => handleRemoveAddress(index - 1)}><img className="ml-4 h-5 w-5" src="/remove_button.png" alt="" /></div>
                         </div>
                     ))

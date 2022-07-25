@@ -1,5 +1,4 @@
-// import { findConnection } from '../covalent/AddrConnection'
-import { testConnection } from '../covalent/AddrConnection' // Replace this with findConnection
+import { FindConnection } from '../covalent/AddrConnection'
 
 class Graph {
 
@@ -55,7 +54,7 @@ class Graph {
     }
 }
 
-export const findConnectedComponents = (addressArray) => {
+export const findConnectedComponents = async (addressArray) => {
     // Create Graph
     var g = new Graph(addressArray.length)
     for (let i = 0; i < addressArray.length; i++) {
@@ -64,7 +63,8 @@ export const findConnectedComponents = (addressArray) => {
 
     for (let i = 0; i < addressArray.length - 1; i++) {
         for (let j = i + 1; j < addressArray.length; j++) {
-            if (testConnection(addressArray[i], addressArray[j])) {
+            const connectionResponse = await FindConnection(addressArray[i], addressArray[j])
+            if (connectionResponse.originIsConnected) {
                 g.addEdge(addressArray[i], addressArray[j])
             }
         }

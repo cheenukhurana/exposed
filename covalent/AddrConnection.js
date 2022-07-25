@@ -55,7 +55,7 @@ export async function FindConnection(originAddr, destinationAddr) {
     var originIsConnected = false;
     j.data.items.forEach(tx => {
         console.log("==== transaction is: ", tx);
-        if(tx.from_address == destinationAddr || tx.to_address == destinationAddr) {
+        if(tx.from_address == destinationAddr.toLowerCase() || tx.to_address == destinationAddr.toLowerCase()) {
             console.log("====== connection exists", destinationAddr, tx.to_address, tx.from_address);
             originIsConnected = true;
             if(!conns.includes(destinationAddr)) {
@@ -71,16 +71,6 @@ export async function FindConnection(originAddr, destinationAddr) {
         "error": null,
     }
     return finalResp;
-}
-
-
-// Delete below once findConnection works
-export function testConnection(addressA,addressB)
-{
-    if((addressA === "0x34Ca45aFcb10922b10DE0356Fa39BA36Fc7ac1AF" && addressB==="0x0aF81EF3bBF66CD544B953B11541B44250430199") || (addressA === "0x0aF81EF3bBF66CD544B953B11541B44250430199" && addressB==="0x34Ca45aFcb10922b10DE0356Fa39BA36Fc7ac1AF"))
-    return true
-
-    return false
 }
 
 // async function main() {
